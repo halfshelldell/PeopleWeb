@@ -28,13 +28,37 @@ public class Main {
         Spark.get(
                 "/",
                 (request, response) -> {
+
+                    int offset = 0;
+                    String off = request.queryParams("offset");
+                    if (off != null) {
+                        offset = Integer.valueOf(off);
+                    }
+
+
                     HashMap m = new HashMap();
 
-                    ArrayList<Person> subset = new ArrayList<>();
+                    ArrayList<Person> temp = new ArrayList<>(arrayList.subList(offset, offset + 20));
+                    m.put("arrayList", temp);
+                    m.put("offsetDown", offset - 20);
+                    m.put("offsetUp", offset + 20);
+                    m.put("previous", offset > 0 );
+                    m.put("next", offset < arrayList.size());
 
-                    m.put("arrayList", arrayList);
+
 
                     return new ModelAndView(m, "index.html");
+                },
+                new MustacheTemplateEngine()
+        );
+        Spark.get(
+                "/person",
+                (request, response) -> {
+
+                    int id = Integer.valueOf(request.queryParams("id"));
+                    Person per = arrayList.get(id - 1);
+
+                    return new ModelAndView(per, "person.html");
                 },
                 new MustacheTemplateEngine()
         );

@@ -2,11 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>People Web</title>
 </head>
 <body>
 {{#arrayList}}
- {{firstName}}, {{lastName}}<br>
+    <a href="/person?id={{id}}">{{firstName}}, {{lastName}}</a><br>
 {{/arrayList}}
+
+{{#previous}}
+<a href="/?offset={{offsetDown}}">Previous</a>
+{{/previous}}
+
+{{#next}}
+<a href="/?offset={{offsetUp}}">Next</a>
+{{/next}}
 </body>
 </html>
