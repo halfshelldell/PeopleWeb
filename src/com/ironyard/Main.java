@@ -35,7 +35,6 @@ public class Main {
                         offset = Integer.valueOf(off);
                     }
 
-
                     HashMap m = new HashMap();
 
                     ArrayList<Person> temp = new ArrayList<>(arrayList.subList(offset, offset + 20));
@@ -43,9 +42,7 @@ public class Main {
                     m.put("offsetDown", offset - 20);
                     m.put("offsetUp", offset + 20);
                     m.put("previous", offset > 0 );
-                    m.put("next", offset < arrayList.size());
-
-
+                    m.put("next", offset + 20 < arrayList.size());
 
                     return new ModelAndView(m, "index.html");
                 },
