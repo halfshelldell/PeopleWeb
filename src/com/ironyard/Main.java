@@ -12,6 +12,8 @@ import java.util.Scanner;
 
 public class Main {
 
+    static final int LIMIT = 20;
+
     public static void main(String[] args) throws FileNotFoundException {
 
         ArrayList<Person> arrayList = new ArrayList<>();
@@ -37,12 +39,12 @@ public class Main {
 
                     HashMap m = new HashMap();
 
-                    ArrayList<Person> temp = new ArrayList<>(arrayList.subList(offset, offset + 20));
+                    ArrayList<Person> temp = new ArrayList<>(arrayList.subList(offset, offset + LIMIT));
                     m.put("arrayList", temp);
-                    m.put("offsetDown", offset - 20);
-                    m.put("offsetUp", offset + 20);
+                    m.put("offsetDown", offset - LIMIT);
+                    m.put("offsetUp", offset + LIMIT);
                     m.put("previous", offset > 0 );
-                    m.put("next", offset + 20 < arrayList.size());
+                    m.put("next", offset + LIMIT < arrayList.size());
 
                     return new ModelAndView(m, "index.html");
                 },
